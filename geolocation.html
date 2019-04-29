@@ -10,7 +10,10 @@
 
 <body>
   <p id="gotgeo"></p>
+  <h1 id="lat"></h1>
+  <h1 id="lon"></h1>
   <script>
+    
     function setup() {
       if(geoCheck() == true){//geolocation is available
         document.getElementById("gotgeo").innerHTML = "You have a geolocation available";
@@ -18,6 +21,11 @@
 	    } else{//error getting geolocaion
 	      document.getElementById("gotgeo").innerHTML = "No location available";
 	    }
+    }
+    
+    function doThisOnLocation() {
+      document.getElementById("lat").innerHTML = "lat:"  + position.latitude.toFixed(4);
+      document.getElementById("lon").innerHTML = "lon:"  + position.longitude.toFixed(4);
     }
     
   </script>
