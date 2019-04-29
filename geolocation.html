@@ -21,10 +21,11 @@
 	    } else{//error getting geolocaion
 	      document.getElementById("gotgeo").innerHTML = "No location available";
 	    }
+	        getCurrentPosition(doThisOnLocaton);
+
     }
-    getCurrentPosition(doThisOnLocaton);
-    
-    function doThisOnLocation() {
+
+    function doThisOnLocation(position) {
       document.getElementById("lat").innerHTML = "lat:"  + position.latitude.toFixed(4);
       document.getElementById("lon").innerHTML = "lon:"  + position.longitude.toFixed(4);
     }
