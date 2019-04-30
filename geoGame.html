@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <script src="p5.min.js"></script>
+        <script src="p5.geolocation.js"></script>
+    </head>
+    <body>
+        <p id="locAvail"></p>
+        <h1 id="lat"></h1>
+        <h1 id="lon"></h1>
+        <h1 id="distance"></h1>
+        <script>
+            var distance;
+            var mylat;
+            var mylon;
+            var treasurelat = 21.310222; //lat of end goal
+            var treasurelon = -157.837545; //lon of end goal
+            function setup() {
+                if (geoCheck() == true) {
+                    document.getElementById("locAvail").innerHTML = "Ready";  
+                }
+                else {
+                    document.getElementById("locAvail").innerHTML = "Must have GPS enabled";
+                }
+                intervalCurrentPosition(positionPing, 1000);
+            }
+            function positionPing(position) {
+                mylat = position.latitude; //lat of phone
+                mylon = position.longitude; //lon of phone
+                distance = calcGeoDistance(mylat, mylon, treasurelat, treasurelon, 'mi');
+                // lat and lon of phone, lat and lon of goal, unit of measurement (miles)
+                document.getElementById("lat").innerHTML = "Latitude: " + mylat.toFixed(2);
+                document.getElementById("lon").innerHTML = "Longitude: " + mylon.toFixed(2);
+                document.getElementById("distance").innerHTML = "Distance: " + distance.toFixed(2) + " mi";
+
+                if (distance < 0.05) {
+                    document.getElementById("locAvail").innerHTML = "You found the treasure!";
+                }
+            }
+        </script>
+    </body>
+
+</html>
